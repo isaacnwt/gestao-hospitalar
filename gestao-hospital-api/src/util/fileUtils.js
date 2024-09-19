@@ -8,7 +8,7 @@ function read(fileName, callback) {
 }
 
 function write(fileName, content) {
-    fileSystem.writeFile(fileName, content, 'utf-8', (err, data) => {
+    fileSystem.appendFile(fileName, content, 'utf-8', (err, data) => {
         if (err) throw err;
         console.log('Arquivo atualizado com sucesso!');
     });

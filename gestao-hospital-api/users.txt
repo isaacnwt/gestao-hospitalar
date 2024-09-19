@@ -1,1 +1,2 @@
 Isaac;paciente;isaac@email.com
+José;medico;jose@hospital.com
