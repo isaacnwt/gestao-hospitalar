@@ -1,5 +1,4 @@
-const { read, write } = require('../util/fileUtils');
-const { parseUsers } = require('../util/userUtils');
+const { read, write, parseUsers } = require('../util/utils');
 const crypto = require('crypto');
 
 function generateId() {

@@ -1,13 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const { getUsers, createUser } = require('./controller/userController');
-const { createConsulta, getConsultasByMedico, getConsultasByPaciente } = require('./controller/consultaController');
+const { createConsulta, getConsultasByMedico, getConsultasByPaciente, getConsultas } = require('./controller/consultaController');
 
-router.get('/api/users', getUsers);
-router.post('/api/users', createUser);
+router.get('/users', getUsers);
+router.post('/users', createUser);
 
-router.post('/api/consultas', createConsulta);
-// router.get('/api/medicos/:idMedico/consultas', getConsultasByMedico);
-// router.get('/api/pacientes/:idPaciente/consultas', getConsultasByPaciente);
+router.post('/consultas', createConsulta);
+router.get('/consultas', getConsultas);
+router.get('/medicos/:idMedico/consultas', getConsultasByMedico);
+router.get('/pacientes/:idPaciente/consultas', getConsultasByPaciente);
 
 module.exports = router;
