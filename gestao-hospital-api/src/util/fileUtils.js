@@ -1,9 +1,9 @@
 const fileSystem = require('fs'); 
 
-function read(fileName) {
+function read(fileName, callback) {
     fileSystem.readFile(fileName, 'utf-8', (err, data) => {
         if (err) throw err;
-        console.log(data);
+        callback(data);
     });
 }
 

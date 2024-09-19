@@ -4,8 +4,13 @@ const { read, write } = require('./util/fileUtils');
 const router = express.Router();
 
 router.get('/api/users', (req, res) => {
-    read('users.txt');
-    res.send('Leitura de usuários concluída. Verifique o console.');
+    read('users.txt', (data) => {
+        const users = data.trim().split('\n').map(line => {
+            const [nome, papel, email] = line.split(';');
+            return { nome, papel, email };
+        });
+        res.json(users);
+    });
 });
 
 router.post('/api/users', (req, res) => {
