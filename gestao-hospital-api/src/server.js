@@ -9,5 +9,5 @@ app.use(express.json());
 app.use(routes);
 
 app.listen(8080,()=>{
-   console.log('Conectando porta 8080...');
+   console.log('Local: http://localhost:8080/api');
 });
