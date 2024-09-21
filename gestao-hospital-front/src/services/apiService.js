@@ -1,32 +1,44 @@
 const API_URL = 'http://localhost:8080';
 
 export async function fetchUsers() {
-    try {
-        const response = await fetch(`${API_URL}/users`);
-        if (!response.ok) {
-            throw new Error('Erro ao buscar usuários');
-        }
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        
-    }
+    const response = await fetch(`${API_URL}/users`);
+    if (!response.ok) 
+        throw new Error('Erro ao buscar usuários');
+    return await response.json();
 }
 
 export async function addUser(user) {
-    try {
-        const response = await fetch(`${API_URL}/users`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        });
-        if (!response.ok) {
-            throw new Error('Erro ao buscar usuários');
-        }
-        return await response.json();
-    } catch (error) {
-        
-    }
+    const response = await fetch(`${API_URL}/users`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(user)
+    });
+    if (!response.ok)
+        throw new Error('Erro ao buscar usuários');
+    return await response.json();
+}
+
+export async function fetchMedicos() {
+    const response = await fetch(`${API_URL}/users/medicos`);
+    if (!response.ok)
+        throw new Error('Erro ao buscar médicos');
+    return await response.json();
+}
+
+export async function fetchPacientes() {
+    const response = await fetch(`${API_URL}/users/pacientes`);
+    if (!response.ok)
+        throw new Error('Erro ao buscar pacientes');
+    return await response.json();
+}
+
+export async function addConsulta(consulta) {
+    const response = await fetch(`${API_URL}/consultas`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(consulta)
+    });
+    if (!response.ok) 
+        throw new Error('Erro ao cadastrar consulta');
+    return await response.json();
 }

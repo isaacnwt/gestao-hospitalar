@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchUsers, addUser } from '../services/apiService';
+import { fetchUsers, addUser } from '../../services/apiService';
 import './AdminPage.css';
 
 function AdminPage() {
