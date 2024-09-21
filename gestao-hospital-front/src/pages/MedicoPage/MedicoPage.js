@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchConsultasByMedico } from '../../services/apiService';
 import NotificacaoConsultasComponent from '../../components/NotificacaoConsultasComponent/NotificacaoConsultasComponent';
+import BotaoVoltarComponent from '../../components/BotaoVoltarComponent';
 
 function MedicoPage({ userId }) {
   const [consultas, setConsultas] = useState([]);
@@ -21,6 +22,7 @@ function MedicoPage({ userId }) {
   return (
     <div>
       <NotificacaoConsultasComponent consultas={consultas} tipoUsuario="medico" />
+      <BotaoVoltarComponent />
     </div>
   );
 }

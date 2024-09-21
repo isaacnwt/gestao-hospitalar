@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchMedicos, fetchPacientes, addConsulta } from '../../services/apiService';
+import BotaoVoltarComponent from '../../components/BotaoVoltarComponent';
 import './ConsultaPage.css';
 
 function ConsultaPage() {
@@ -88,6 +89,7 @@ function ConsultaPage() {
 
                 <button type="submit">Cadastrar Consulta</button>
             </form>
+            <BotaoVoltarComponent />
         </div>
     );
 }

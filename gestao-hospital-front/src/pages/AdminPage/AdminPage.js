@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchUsers, addUser } from '../../services/apiService';
+import BotaoVoltarComponent from '../../components/BotaoVoltarComponent';
 import './AdminPage.css';
 
 function AdminPage() {
@@ -96,6 +97,7 @@ function AdminPage() {
           ))}
         </tbody>
       </table>
+      <BotaoVoltarComponent />
     </div>
   );
 }
