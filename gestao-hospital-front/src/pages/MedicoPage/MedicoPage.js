@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchConsultasByMedico } from '../../services/apiService';
+import NotificacaoConsultasComponent from '../../components/NotificacaoConsultasComponent/NotificacaoConsultasComponent';
 
 function MedicoPage({ userId }) {
   const [consultas, setConsultas] = useState([]);
@@ -19,18 +20,7 @@ function MedicoPage({ userId }) {
 
   return (
     <div>
-      <h1>Consultas Agendadas</h1>
-      {consultas.length === 0 ? (
-        <p>Você não tem consultas agendadas.</p>
-      ) : (
-        <ul>
-          {consultas.map((consulta) => (
-            <li key={consulta.idConsulta}>
-              Paciente: {consulta.paciente}, Data: {consulta.dataConsulta}, Descrição: {consulta.descricao}
-            </li>
-          ))}
-        </ul>
-      )}
+      <NotificacaoConsultasComponent consultas={consultas} tipoUsuario="medico" />
     </div>
   );
 }
