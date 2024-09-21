@@ -25,8 +25,8 @@ exports.createConsulta = (req, res) => {
         }
 
         try {
-            validateRole(medico.papel, 'medico');
-            validateRole(paciente.papel, 'paciente');
+            validateRole(medico.role, 'medico');
+            validateRole(paciente.role, 'paciente');
         } catch (error) {
             return res.status(400).json({ message: error.message });
         }

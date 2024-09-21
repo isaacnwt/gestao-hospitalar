@@ -4,7 +4,7 @@ import './AdminPage.css';
 
 function AdminPage() {
   const [users, setUsers] = useState([]);
-  const [newUser, setNewUser] = useState({ nome: '', papel: '', email: '' });
+  const [newUser, setNewUser] = useState({ nome: '', role: '', email: '' });
 
   useEffect(() => {
     async function loadUsers() {
@@ -23,7 +23,7 @@ function AdminPage() {
     event.preventDefault();
     try {
       await addUser(newUser);
-      setNewUser({ nome: '', papel: '', email: '' });
+      setNewUser({ nome: '', role: '', email: '' });
       const userList = await fetchUsers();
       setUsers(userList);
     } catch (error) {
@@ -31,8 +31,8 @@ function AdminPage() {
     }
   };
 
-  const formatPapel = (papel) => {
-    switch (papel) {
+  const formatRole = (role) => {
+    switch (role) {
       case 'medico':
         return 'Médico';
       case 'admin':
@@ -40,7 +40,7 @@ function AdminPage() {
       case 'paciente':
         return 'Paciente';
       default:
-        return papel;
+        return role;
     }
   };
 
@@ -66,8 +66,8 @@ function AdminPage() {
           />
         </div>
         <select
-          value={newUser.papel}
-          onChange={(e) => setNewUser({ ...newUser, papel: e.target.value })}
+          value={newUser.role}
+          onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
           required
         >
           <option value="">--</option>
@@ -91,7 +91,7 @@ function AdminPage() {
             <tr key={index}>
               <td>{user.nome}</td>
               <td>{user.email}</td>
-              <td>{formatPapel(user.papel)}</td>
+              <td>{formatRole(user.role)}</td>
             </tr>
           ))}
         </tbody>

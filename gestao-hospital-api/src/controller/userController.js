@@ -13,17 +13,17 @@ exports.getUsers = (req, res) => {
 };
 
 exports.createUser = (req, res) => {
-    const { nome, papel, email } = req.body;
+    const { nome, role, email } = req.body;
     const id = generateId();  
-    const content = `${id};${nome};${papel};${email}\n`;
+    const content = `${id};${nome};${role};${email}\n`;
     write('users.txt', content);
-    res.json({ id, nome, papel, email });
+    res.json({ id, nome, role, email });
 };
 
 exports.getPacientes = (req, res) => {
     read('users.txt', (data) => {
         const users = parseUsers(data);
-        const pacientes = users.filter(user => user.papel === 'paciente');
+        const pacientes = users.filter(user => user.role === 'paciente');
         res.json(pacientes);
     });
 };
@@ -31,7 +31,7 @@ exports.getPacientes = (req, res) => {
 exports.getMedicos = (req, res) => {
     read('users.txt', (data) => {
         const users = parseUsers(data);
-        const medicos = users.filter(user => user.papel === 'medico');
+        const medicos = users.filter(user => user.role === 'medico');
         res.json(medicos);
     });
 };

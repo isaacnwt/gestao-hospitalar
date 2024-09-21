@@ -16,8 +16,8 @@ function write(fileName, content) {
 
 function parseUsers(data) {
     return data.trim().split('\n').map(line => {
-        const [id, nome, papel, email] = line.split(';');
-        return { id, nome, papel, email };
+        const [id, nome, role, email] = line.split(';');
+        return { id, nome, role, email };
     });
 }
 
