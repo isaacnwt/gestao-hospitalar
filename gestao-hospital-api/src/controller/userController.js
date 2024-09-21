@@ -19,3 +19,19 @@ exports.createUser = (req, res) => {
     write('users.txt', content);
     res.json({ id, nome, papel, email });
 };
+
+exports.getPacientes = (req, res) => {
+    read('users.txt', (data) => {
+        const users = parseUsers(data);
+        const pacientes = users.filter(user => user.papel === 'paciente');
+        res.json(pacientes);
+    });
+};
+
+exports.getMedicos = (req, res) => {
+    read('users.txt', (data) => {
+        const users = parseUsers(data);
+        const medicos = users.filter(user => user.papel === 'medico');
+        res.json(medicos);
+    });
+};
