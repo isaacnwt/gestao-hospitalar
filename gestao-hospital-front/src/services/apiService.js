@@ -42,3 +42,17 @@ export async function addConsulta(consulta) {
         throw new Error('Erro ao cadastrar consulta');
     return await response.json();
 }
+
+export async function fetchConsultasByMedico(idMedico) {
+    const response = await fetch(`${API_URL}/medicos/${idMedico}/consultas`);
+    if (!response.ok)
+      throw new Error('Erro ao buscar consultas');
+    return await response.json();
+  }
+  
+  export async function fetchConsultasByPaciente(idPaciente) {
+    const response = await fetch(`${API_URL}/pacientes/${idPaciente}/consultas`);
+    if (!response.ok)
+      throw new Error('Erro ao buscar consultas');
+    return await response.json();
+  }
