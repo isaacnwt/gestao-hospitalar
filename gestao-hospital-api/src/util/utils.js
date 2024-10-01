@@ -16,14 +16,14 @@ function write(fileName, content) {
 
 function parseUsers(data) {
     return data.trim().split('\n').map(line => {
-        const [id, nome, role, email] = line.split(';');
+        const [id, nome, role, email] = line.replace('\r', '').split(';');
         return { id, nome, role, email };
     });
 }
 
 function parseConsultas(data) {
     return data.trim().split('\n').map(line => {
-        const [idConsulta, idMedico, idPaciente, dataConsulta, descricao] = line.split(';');
+        const [idConsulta, idMedico, idPaciente, dataConsulta, descricao] = line.replace('\r', '').split(';');
         return { idConsulta, idMedico, idPaciente, dataConsulta, descricao };
     });
 }
