@@ -2,3 +2,4 @@
 023bee3c08ee886c;José;medico;jose@email
 c33ca280c1e48afc;Victor;paciente;victor@email.com
 5d7a7ec372c5855f;admin;admin;admin@email.com
+9843d1ea1cde5453;Kelli;paciente;kelli@email.com;13575842;Avenida Paulo de Arruda Correa da Silva, Recreio dos Bandeirantes, São Carlos - SP;46

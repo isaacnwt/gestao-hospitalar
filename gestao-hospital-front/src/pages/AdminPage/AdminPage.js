@@ -5,7 +5,14 @@ import './AdminPage.css';
 
 function AdminPage() {
   const [users, setUsers] = useState([]);
-  const [newUser, setNewUser] = useState({ nome: '', role: '', email: '' });
+  const [newUser, setNewUser] = useState({
+    nome: '',
+    role: '',
+    email: '',
+    endereco: '',
+    cep: '',
+    numero: '',
+  });
 
   useEffect(() => {
     async function loadUsers() {
@@ -20,11 +27,35 @@ function AdminPage() {
     loadUsers();
   }, []);
 
+  const handleCEPChange = async (e) => {
+    const cep = e.target.value;
+    setNewUser({ ...newUser, cep });
+
+    if (cep.length === 8) {
+      try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
+
+        if (data.erro) {
+          alert('CEP não encontrado');
+        } else {
+          setNewUser({
+            ...newUser,
+            endereco: `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`,
+            cep,
+          });
+        }
+      } catch (error) {
+        console.error('Erro ao buscar o CEP:', error);
+      }
+    }
+  };
+
   const handleAddUser = async (event) => {
     event.preventDefault();
     try {
       await addUser(newUser);
-      setNewUser({ nome: '', role: '', email: '' });
+      setNewUser({ nome: '', role: '', email: '', endereco: '', cep: '', numero: '' });
       const userList = await fetchUsers();
       setUsers(userList);
     } catch (error) {
@@ -66,6 +97,32 @@ function AdminPage() {
             required
           />
         </div>
+        <div className="form-row">
+          <input
+            type="text"
+            placeholder="CEP"
+            value={newUser.cep}
+            onChange={handleCEPChange}
+            maxLength="8"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Endereço"
+            value={newUser.endereco}
+            onChange={(e) => setNewUser({ ...newUser, endereco: e.target.value })}
+            disabled
+          />
+        </div>
+        <div className="form-row">
+          <input
+            type="text"
+            placeholder="Número"
+            value={newUser.numero}
+            onChange={(e) => setNewUser({ ...newUser, numero: e.target.value })}
+            required
+          />
+        </div>
         <select
           value={newUser.role}
           onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
@@ -84,6 +141,7 @@ function AdminPage() {
           <tr>
             <th>Nome</th>
             <th>Email</th>
+            <th>Endereço</th>
             <th>Tipo</th>
           </tr>
         </thead>
@@ -92,6 +150,7 @@ function AdminPage() {
             <tr key={index}>
               <td>{user.nome}</td>
               <td>{user.email}</td>
+              <td>{user.endereco}, {user.numero}</td>
               <td>{formatRole(user.role)}</td>
             </tr>
           ))}

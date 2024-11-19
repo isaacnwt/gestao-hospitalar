@@ -13,11 +13,11 @@ exports.getUsers = (req, res) => {
 };
 
 exports.createUser = (req, res) => {
-    const { nome, role, email } = req.body;
+    const { nome, role, email, cep, endereco, numero } = req.body;
     const id = generateId();  
-    const content = `${id};${nome};${role};${email}\n`;
+    const content = `${id};${nome};${role};${email};${cep};${endereco};${numero}\n`;
     write('users.txt', content);
-    res.json({ id, nome, role, email });
+    res.json({ id, nome, role, email, cep, endereco, numero });
 };
 
 exports.getPacientes = (req, res) => {
