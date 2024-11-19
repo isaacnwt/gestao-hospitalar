@@ -16,6 +16,7 @@ function AdminPage() {
     estado: '',
     numero: '',
   });
+  const [cepError, setCepError] = useState('');
 
   useEffect(() => {
     async function loadUsers() {
@@ -31,6 +32,7 @@ function AdminPage() {
 
   const handleCepChange = async (cep) => {
     setNewUser({ ...newUser, cep });
+    setCepError('');
 
     if (cep.length === 8) {
       try {
@@ -38,7 +40,14 @@ function AdminPage() {
         const data = await response.json();
 
         if (data.erro) {
-          alert('CEP inválido!');
+          setCepError('CEP não encontrado. Por favor, verifique o valor.');
+          setNewUser({
+            ...newUser,
+            rua: '',
+            bairro: '',
+            cidade: '',
+            estado: '',
+          });
         } else {
           setNewUser({
             ...newUser,
@@ -48,10 +57,11 @@ function AdminPage() {
             estado: data.uf || '',
             cep,
           });
+          setCepError('');
         }
       } catch (error) {
         console.error('Erro ao buscar o CEP:', error);
-        alert('Erro ao buscar o CEP.');
+        setCepError('Erro ao buscar o CEP. Tente novamente mais tarde.');
       }
     }
   };
@@ -71,6 +81,7 @@ function AdminPage() {
         estado: '',
         numero: '',
       });
+      setCepError('');
       const userList = await fetchUsers();
       setUsers(userList);
     } catch (error) {
@@ -127,6 +138,7 @@ function AdminPage() {
             readOnly
           />
         </div>
+        {cepError && <p className="error">{cepError}</p>}
         <div className="form-row">
           <input
             type="text"
