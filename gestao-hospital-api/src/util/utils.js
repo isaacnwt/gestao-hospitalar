@@ -16,8 +16,8 @@ function write(fileName, content) {
 
 function parseUsers(data) {
     return data.trim().split('\n').map(line => {
-        const [id, nome, role, email, cep, endereco, numero] = line.replace('\r', '').split(';');
-        return { id, nome, role, email, cep, endereco, numero };
+        const [id, nome, role, email, cep, rua, bairro, cidade, estado, numero] = line.replace('\r', '').split(';');
+        return { id, nome, role, email, cep, rua, bairro, cidade, estado, numero };
     });
 }
 

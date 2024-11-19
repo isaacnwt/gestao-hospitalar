@@ -1,2 +1,1 @@
-52ed125972e9e1d9;023bee3c08ee886c;6535d681c8ee8eed;2024-09-22;Consulta de retorno para avaliar exames.
-e0a552ebcadcc6fe;023bee3c08ee886c;c33ca280c1e48afc;2024-09-28;Toma dipirona q sara
+52ed125972e9e1d9;00afe21e71674e4b;058c4c8065c311ac;2024-09-22;Consulta de retorno para avaliar exames.

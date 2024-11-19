@@ -9,8 +9,11 @@ function AdminPage() {
     nome: '',
     role: '',
     email: '',
-    endereco: '',
     cep: '',
+    rua: '',
+    bairro: '',
+    cidade: '',
+    estado: '',
     numero: '',
   });
 
@@ -23,12 +26,10 @@ function AdminPage() {
         console.error('Erro ao carregar usuários:', error);
       }
     }
-
     loadUsers();
   }, []);
 
-  const handleCEPChange = async (e) => {
-    const cep = e.target.value;
+  const handleCepChange = async (cep) => {
     setNewUser({ ...newUser, cep });
 
     if (cep.length === 8) {
@@ -37,16 +38,20 @@ function AdminPage() {
         const data = await response.json();
 
         if (data.erro) {
-          alert('CEP não encontrado');
+          alert('CEP inválido!');
         } else {
           setNewUser({
             ...newUser,
-            endereco: `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`,
+            rua: data.logradouro || '',
+            bairro: data.bairro || '',
+            cidade: data.localidade || '',
+            estado: data.uf || '',
             cep,
           });
         }
       } catch (error) {
         console.error('Erro ao buscar o CEP:', error);
+        alert('Erro ao buscar o CEP.');
       }
     }
   };
@@ -55,11 +60,21 @@ function AdminPage() {
     event.preventDefault();
     try {
       await addUser(newUser);
-      setNewUser({ nome: '', role: '', email: '', endereco: '', cep: '', numero: '' });
+      setNewUser({
+        nome: '',
+        role: '',
+        email: '',
+        cep: '',
+        rua: '',
+        bairro: '',
+        cidade: '',
+        estado: '',
+        numero: '',
+      });
       const userList = await fetchUsers();
       setUsers(userList);
     } catch (error) {
-      console.error('Erro ao carregar usuários:', error);
+      console.error('Erro ao adicionar usuário:', error);
     }
   };
 
@@ -102,16 +117,14 @@ function AdminPage() {
             type="text"
             placeholder="CEP"
             value={newUser.cep}
-            onChange={handleCEPChange}
-            maxLength="8"
+            onChange={(e) => handleCepChange(e.target.value)}
             required
           />
           <input
             type="text"
-            placeholder="Endereço"
-            value={newUser.endereco}
-            onChange={(e) => setNewUser({ ...newUser, endereco: e.target.value })}
-            disabled
+            placeholder="Rua"
+            value={newUser.rua}
+            readOnly
           />
         </div>
         <div className="form-row">
@@ -121,6 +134,26 @@ function AdminPage() {
             value={newUser.numero}
             onChange={(e) => setNewUser({ ...newUser, numero: e.target.value })}
             required
+          />
+          <input
+            type="text"
+            placeholder="Bairro"
+            value={newUser.bairro}
+            readOnly
+          />
+        </div>
+        <div className="form-row">
+          <input
+            type="text"
+            placeholder="Cidade"
+            value={newUser.cidade}
+            readOnly
+          />
+          <input
+            type="text"
+            placeholder="Estado"
+            value={newUser.estado}
+            readOnly
           />
         </div>
         <select
@@ -141,8 +174,9 @@ function AdminPage() {
           <tr>
             <th>Nome</th>
             <th>Email</th>
-            <th>Endereço</th>
             <th>Tipo</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
           </tr>
         </thead>
         <tbody>
@@ -150,8 +184,9 @@ function AdminPage() {
             <tr key={index}>
               <td>{user.nome}</td>
               <td>{user.email}</td>
-              <td>{user.endereco}, {user.numero}</td>
               <td>{formatRole(user.role)}</td>
+              <td>{user.bairro}</td>
+              <td>{user.cidade}</td>
             </tr>
           ))}
         </tbody>

@@ -13,11 +13,16 @@ exports.getUsers = (req, res) => {
 };
 
 exports.createUser = (req, res) => {
-    const { nome, role, email, cep, endereco, numero } = req.body;
-    const id = generateId();  
-    const content = `${id};${nome};${role};${email};${cep};${endereco};${numero}\n`;
+    const { nome, role, email, cep, rua, bairro, cidade, estado, numero } = req.body;
+    const id = generateId();
+
+    if (!nome || !email || !role || !cep || !rua || !bairro || !cidade || !estado || !numero) {
+        return res.status(400).json({ error: 'Faltando campo obrigatório.' });
+    }
+
+    const content = `${id};${nome};${role};${email};${cep};${rua};${bairro};${cidade};${estado};${numero}\n`;
     write('users.txt', content);
-    res.json({ id, nome, role, email, cep, endereco, numero });
+    res.json({ id, nome, role, email, cep, rua, bairro, cidade, estado, numero });
 };
 
 exports.getPacientes = (req, res) => {

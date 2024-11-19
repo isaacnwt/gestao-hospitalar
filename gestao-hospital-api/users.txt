@@ -1,5 +1,3 @@
-6535d681c8ee8eed;Isaac;paciente;isaac@email.com
-023bee3c08ee886c;José;medico;jose@email
-c33ca280c1e48afc;Victor;paciente;victor@email.com
 5d7a7ec372c5855f;admin;admin;admin@email.com
-9843d1ea1cde5453;Kelli;paciente;kelli@email.com;13575842;Avenida Paulo de Arruda Correa da Silva, Recreio dos Bandeirantes, São Carlos - SP;46
+058c4c8065c311ac;Isaac;paciente;isaac@gmail.com;13575842;Avenida Paulo de Arruda Correa da Silva;Recreio dos Bandeirantes;São Carlos;SP;46
+00afe21e71674e4b;José;medico;jose@unimed;13560610;Rua José Bonifácio;Núcleo Residencial Silvio Vilari;São Carlos;SP;580
